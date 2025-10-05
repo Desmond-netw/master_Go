@@ -17,7 +17,7 @@ func main() {
 	// if the file does not exist it will return error msg.
 
 	//------------------
-	file, err := os.Stat("/home/analyst/myprojects/master_Go/examples/temp") // specify file path
+	file, err := os.Stat("/home/analyst/myprojects/master_Go/examples/temp/data.txt") // specify file path
 
 	if err != nil {
 		// ------- checking if file exist
