@@ -17,7 +17,7 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	defer file.Close()
+	defer file.Close() // defer is use for cleanup , like closing file after runing
 
 	// write contents to the file
 	_, err = file.WriteString(myString)
