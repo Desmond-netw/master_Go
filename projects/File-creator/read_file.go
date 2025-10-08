@@ -13,7 +13,7 @@ func readFile(filename string) {
 
 	// Open function for reading
 	// for proper file path handling in all OS
-	path := filepath.Join("projects", "File-creator", "temp", filename)
+	path := filepath.Join("temp", filename)
 	myfile, err := os.Open(path)
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error opening file : %v\n", err)
