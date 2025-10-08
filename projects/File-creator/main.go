@@ -13,6 +13,11 @@ func main() {
 	reader := bufio.NewReader(os.Stdin)
 
 	//header intro
+	fmt.Println("Welcome to Text Base content creating ")
 
-	fmt.Println("Enter ")
+	fmt.Println("Enter Filename ")
+	// initila variables
+	filename, _ := reader.ReadString('\n')
+	filename = filename[:len(filename)-1] // removing white line space
+
 }
