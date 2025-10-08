@@ -20,4 +20,10 @@ func main() {
 	filename, _ := reader.ReadString('\n')
 	filename = filename[:len(filename)-1] // removing white line space
 
+	// content entry
+	fmt.Println("Enter content to write: ")
+	content, _ := reader.ReadString('\n')
+
+	createFile(filename, content)
+	readFile(filename)
 }
