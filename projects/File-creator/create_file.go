@@ -14,7 +14,7 @@ func createFile(filename, content string) {
 	fmt.Println("Writing to file ......")
 
 	// using os.Create to truncate the file
-	path := filepath.Join("projects", "File-creator", "temp", filename)
+	path := filepath.Join("temp", filename)
 	myfile, es := os.Create(path)
 	if es != nil {
 		fmt.Fprintf(os.Stderr, "Error opening file %v\n", es)
@@ -31,5 +31,5 @@ func createFile(filename, content string) {
 		os.Exit(1)
 	}
 	// success message
-	fmt.Printf("\t\v\nFile %s Writen successfully (%d bytes)", filename, myfile)
+	fmt.Printf("\t\v\nFile %s Writen successfully (%s bytes)", filename, myfile)
 }
