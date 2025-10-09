@@ -82,6 +82,11 @@ func main() {
 	fname, _ := reader.ReadString('\n')
 	fname = fname[:len(fname)-1]
 
-	// taking import
+	// taking input for content
+	fmt.Println("Entering file content")
+	fcontent, _ := reader.ReadString('\n')
+
+	createF(fname, fcontent)
+	readF(fname)
 
 }
