@@ -1,6 +1,7 @@
 package main
 
 import (
+	"bufio"
 	"fmt"
 	"io"
 	"os"
@@ -68,4 +69,19 @@ func readF(fname string) {
 
 	fmt.Printf("Successfully open file :%s \n")
 	fmt.Printf("content \n %s \n", string(data))
+}
+
+func main() {
+	// let initilize our reader
+	reader := bufio.NewReader(os.Stdin)
+
+	// prompting
+	fmt.Println("Welcome to Terminal App")
+
+	fmt.Println("Enter file name : \n")
+	fname, _ := reader.ReadString('\n')
+	fname = fname[:len(fname)-1]
+
+	// taking import
+
 }
