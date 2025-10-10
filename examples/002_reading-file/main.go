@@ -29,6 +29,8 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 		fmt.Fprintf(os.Stderr, "Error opening file")
+		os.Exit(1)
 	}
-	os.Exit(1)
+	defer file.Close()
+
 }
