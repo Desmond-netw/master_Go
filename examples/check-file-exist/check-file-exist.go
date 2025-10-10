@@ -7,10 +7,6 @@ import (
 	"os"
 )
 
-// create a point to os.FileInfo
-var file *os.FileInfo
-var err error
-
 func main() {
 	// using Stat() to check file exist and file info
 	// the Stat() function can return file infor
