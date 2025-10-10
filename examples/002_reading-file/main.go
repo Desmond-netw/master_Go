@@ -3,7 +3,9 @@ package main
 import (
 	"bufio"
 	"fmt"
+	"log"
 	"os"
+	"path/filepath"
 )
 
 // Applicatio read file
@@ -22,4 +24,11 @@ func main() {
 	filename, _ := reader.ReadString('\n')
 	filename = filename[:len(filename)-1]
 
+	path := filepath.Join("temp", filename)
+	file, err := os.Open(path)
+	if err != nil {
+		log.Fatal(err)
+		fmt.Fprintf(os.Stderr, "Error opening file")
+	}
+	os.Exit(1)
 }
