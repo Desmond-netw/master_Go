@@ -6,6 +6,7 @@ import (
 	"log"
 	"os"
 	"path/filepath"
+	// "strings"
 )
 
 // Applicatio read file
@@ -47,4 +48,9 @@ func main() {
 
 	// String manipulations
 
+	// Printing output
+	fmt.Println("\n Original Ouput")
+	fmt.Println(content)
+
+	// printing manipulatin
 }
