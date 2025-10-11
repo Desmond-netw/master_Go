@@ -20,17 +20,31 @@ func main() {
 	// reader var
 	reader := bufio.NewReader(os.Stdin)
 	// Print prompt
-	fmt.Println("Enter the fileanme : \n")
+	fmt.Println("Enter the fileanme :")
 	filename, _ := reader.ReadString('\n')
 	filename = filename[:len(filename)-1]
 
-	path := filepath.Join("temp", filename)
+	path := filepath.Join("./", filename)
+	// open file
 	file, err := os.Open(path)
 	if err != nil {
 		log.Fatal(err)
-		fmt.Fprintf(os.Stderr, "Error opening file")
 		os.Exit(1)
 	}
 	defer file.Close()
+
+	// scan file
+	scanner := bufio.NewScanner(file)
+	var content string
+	for scanner.Scan() {
+		content += scanner.Text() + "\n"
+	}
+
+	if err := scanner.Err(); err != nil {
+		fmt.Fprintf(os.Stderr, "Error reading file %v\n", err)
+		os.Exit(1)
+	}
+
+	// String manipulations
 
 }
