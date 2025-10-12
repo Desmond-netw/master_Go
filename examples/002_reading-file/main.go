@@ -6,7 +6,7 @@ import (
 	"log"
 	"os"
 	"path/filepath"
-	// "strings"
+	"strings"
 )
 
 // Applicatio read file
@@ -47,10 +47,15 @@ func main() {
 	}
 
 	// String manipulations
-
+	trimmed := strings.TrimSpace(content)
+	toUpper := strings.ToUpper(trimmed)
 	// Printing output
 	fmt.Println("\n Original Ouput")
 	fmt.Println(content)
 
-	// printing manipulatin
+	// printing manipulations
+	fmt.Println("\n Manipulated String contents")
+	fmt.Println(trimmed)
+	fmt.Println("converted to Upper case")
+	fmt.Println(toUpper)
 }
