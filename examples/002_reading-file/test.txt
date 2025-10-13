@@ -1,2 +1,4 @@
 How I started learning kooding at kood/sisu
+
+
 examples/temp/test.txt
