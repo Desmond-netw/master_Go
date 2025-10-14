@@ -2,6 +2,7 @@ package main
 
 import (
 	"encoding/csv"
+	"flag"
 	"fmt"
 	"log"
 	"os"
@@ -10,7 +11,17 @@ import (
 // Application to read csv file
 
 func main() {
+
+	// display help flag
+	help := flag.Bool("h", false, "Display help and Usage")
+	flag.Parse()
+	if *help {
+		fmt.Println("App usage: ")
+		fmt.Println("Application usag go run main.go ")
+		return
+	}
 	// using os.open to open a file
+
 	file, err := os.Open("student.csv")
 	if err != nil {
 		log.Fatal(err)
