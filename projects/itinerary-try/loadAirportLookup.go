@@ -1,6 +1,7 @@
 package main
 
 import (
+	"encoding/csv"
 	"fmt"
 	"os"
 )
@@ -16,4 +17,11 @@ func loadAirportLookup(filePath string) (map[string]string, error) {
 	}
 	defer csvFile.Close()
 
+	//create a new csv reader
+	csvReader := csv.NewReader(csvFile)
+	//read all records from csv
+	records, es := csvReader.ReadAll()
+	if es != nil {
+		return nil, fmt.Errorf("error reading csv: %v", es)
+	}
 }
