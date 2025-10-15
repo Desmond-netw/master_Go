@@ -2,7 +2,6 @@ package main
 
 // imports
 import (
-	"encoding/csv"
 	"flag"
 	"fmt"
 	"log"
@@ -32,7 +31,7 @@ func main() {
 	}
 	// Assign variables to arguments
 	inputPath := args[0]
-	outPuth := args[1]
+	outputPath := args[1]
 	lookupPath := args[2]
 
 	//Load airport lookup data from CSV into a map
@@ -42,7 +41,7 @@ func main() {
 		os.Exit(1)
 	}
 
-	// Read the raw itinerary text from the input file 
+	// Read the raw itinerary text from the input file
 	inputData, err := os.ReadFile(inputPath)
 	if err != nil {
 		log.Fatal("Error Reading lookup file")
@@ -62,5 +61,8 @@ func main() {
 		}
 		outputLines = append(outputLines, eachline)
 	}
-	
+
+	// Write the processed lines to the output file
+	err = os.WriteFile(outputPath, []byte(strings.Join(outputLines, "\n")))
+
 }
