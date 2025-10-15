@@ -52,7 +52,7 @@ func main() {
 	lines := strings.Split(string(inputData), "\n")
 	var outputLines []string
 
-	// process each line : replace airport coes with full names
+	// process each line : replace airport codes with full names
 	for _, eachline := range lines {
 		for code, name := range airportMap {
 			if strings.Contains(eachline, code) {
@@ -63,6 +63,10 @@ func main() {
 	}
 
 	// Write the processed lines to the output file
-	err = os.WriteFile(outputPath, []byte(strings.Join(outputLines, "\n")))
+	err = os.WriteFile(outputPath, []byte(strings.Join(outputLines, "\n")), 0644)
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error writing ouputu file: %v\n", err)
+		os.Exit(1)
+	}
 
 }
