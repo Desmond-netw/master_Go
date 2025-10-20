@@ -38,12 +38,12 @@ func loadAirportLookup(filePath string) (*AirportData, error) {
 	reader := csv.NewReader(file)
 	records, err := reader.ReadAll()
 	if err != nil {
-		return nil, fmt.Errorf("Airport lookup malformed")
+		return nil, fmt.Errorf("airport lookup malformed")
 	}
 
 	// Check if we have at least a header row
 	if len(records) < 1 {
-		return nil, fmt.Errorf("Airport lookup malformed")
+		return nil, fmt.Errorf("airport lookup malformed")
 	}
 
 	airportData := &AirportData{
@@ -57,12 +57,12 @@ func loadAirportLookup(filePath string) (*AirportData, error) {
 
 		// Check if we have enough columns and no empty cells
 		if len(record) < 6 {
-			return nil, fmt.Errorf("Airport lookup malformed")
+			return nil, fmt.Errorf("airport lookup malformed")
 		}
 
 		for _, cell := range record {
 			if strings.TrimSpace(cell) == "" {
-				return nil, fmt.Errorf("Airport lookup malformed")
+				return nil, fmt.Errorf("airport lookup malformed")
 			}
 		}
 

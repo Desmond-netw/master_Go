@@ -1,0 +1,8 @@
+before '\v'
+line after '\v'
+
+before '\f'
+line after '\f'
+
+test for'\r'
+line after '\r'

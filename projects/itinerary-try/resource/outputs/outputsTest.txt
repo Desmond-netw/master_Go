@@ -1,0 +1,5 @@
+Trip Details
+From: Los Angeles International Airport
+To: London Heathrow Airport
+Departure: D(2025-10-13T12:30Z)
+Arrival: T12(2025-10-13T20:45+01:00)

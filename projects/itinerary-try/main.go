@@ -27,4 +27,18 @@ func main() {
 		os.Exit(1)
 	}
 
+	// Assign arguments to variables
+	inputFile := args[0]
+	outputFile := args[1]
+	airportFile := args[2]
+
+	// Process the itinerary
+	err := processItinerary(inputFile, outputFile, airportFile)
+	if err != nil {
+		// Print error message to stderr and exit with non-zero status
+		fmt.Fprintln(os.Stderr, "Error:", err)
+		os.Exit(1)
+	}
+
+	fmt.Println("Processing completed successfully.")
 }
