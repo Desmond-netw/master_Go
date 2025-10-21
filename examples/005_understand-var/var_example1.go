@@ -3,7 +3,7 @@ package main
 
 import "fmt"
 
-func main() {
+func exampleMain() {
 	// Declare a variable 'message' of type string and assign a value to it
 	var message string = "Hello, Go Variables!"
 
