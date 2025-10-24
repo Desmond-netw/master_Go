@@ -41,7 +41,7 @@ func createF(fname, content string) {
 		os.Exit(1)
 	}
 
-	fmt.Printf("\n\v\tFile '%s' created sucessfully")
+	fmt.Printf("\n\v\tFile '%v' created sucessfully")
 	fmt.Printf("\n\v\tContent added sucessfule")
 }
 
