@@ -17,5 +17,5 @@ func main() {
 
 	// * operator
 	fmt.Println("To get value of a print *z:", *z)
-
+	
 }
