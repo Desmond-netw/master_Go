@@ -17,7 +17,6 @@ func readFile(filename string) {
 	myfile, err := os.Open(path)
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error opening file : %v\n", err)
-		log.Fatal(err)
 		os.Exit(1)
 	}
 	defer myfile.Close()
