@@ -10,6 +10,8 @@ func main() {
 	output := strings.TrimPrefix(str, "Hello,")
 	// without TrimPrefix
 	fmt.Println("Without Trim Prefix")
+	fmt.Println(str)
+
 	fmt.Println(output)
 
 }
