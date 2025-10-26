@@ -11,7 +11,8 @@ func main() {
 	// without TrimPrefix
 	fmt.Println("Without Trim Prefix")
 	fmt.Println(str)
-
+	// Trimp prefix
+	fmt.Println("Trim the prefix (Hello)")
 	fmt.Println(output)
 
 }
