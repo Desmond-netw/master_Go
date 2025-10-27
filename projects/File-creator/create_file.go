@@ -14,14 +14,14 @@ func createFile(filename, content string) {
 	fmt.Println("Writing to file ......")
 
 	// using os.Create to truncate the file
-	path := filepath.Join("temp", filename)
+	path := filepath.Join("temp", filename) // filepath Join to store the path
 	myfile, es := os.Create(path)
 	if es != nil {
 		fmt.Fprintf(os.Stderr, "Error opening file %v\n", es)
 		log.Fatal(es)
 		os.Exit(1)
 	}
-	defer myfile.Close()
+	defer myfile.Close() // this defer gaurantee the closer of the application
 
 	// write content to the file
 	_, es = myfile.WriteString(content)
