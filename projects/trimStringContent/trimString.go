@@ -24,4 +24,9 @@ func main() {
 	trim1 := strings.Trim(stry1, "!")
 	trim2 := strings.Trim(stry2, "@$")
 
+	// Displaying timed results
+	fmt.Println("\nStrings after the trimming")
+	fmt.Println("Trim 1:", trim1)
+	fmt.Println("Trim 2:", trim2)
+
 }
