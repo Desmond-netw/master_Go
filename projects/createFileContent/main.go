@@ -29,7 +29,7 @@ func createF(fname, content string) {
 	path := filepath.Join("temp", fname)
 	file, err := os.Create(path) // the path help to handle relative file paths
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error creating file %sv\n", err)
+		fmt.Fprintf(os.Stderr, "Error creating file %s\n", err)
 		os.Exit(1)
 	}
 	defer file.Close()
