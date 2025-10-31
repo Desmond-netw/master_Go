@@ -78,9 +78,9 @@ func main() {
 	// prompting
 	fmt.Println("Welcome to Terminal App")
 
-	fmt.Println("Enter file name : \n")
+	fmt.Println("Enter file name : ")
 	fname, _ := reader.ReadString('\n')
-	fname = fname[:len(fname)-1]
+	fname = fname[:len(fname)-1] // remove spaces in filename
 
 	// taking input for content
 	fmt.Println("Entering file content")
