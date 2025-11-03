@@ -14,4 +14,12 @@ func main() {
 	} else {
 		fmt.Println("False")
 	}
+	//Using shorthand-declaration
+	// and using map literals
+	map_2 := map[int]string{
+		90: "Hen",
+		91: "Cow",
+		93: "Cat",
+	}
+	fmt.Println("Map 2", map_2)
 }
