@@ -21,5 +21,6 @@ func main() {
 		91: "Cow",
 		93: "Cat",
 	}
+	fmt.Println("Map[int]string - key :  values")
 	fmt.Println("Map 2", map_2)
 }
