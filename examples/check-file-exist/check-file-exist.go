@@ -23,7 +23,7 @@ func main() {
 	}
 
 	log.Println("File exists ")
-	log.Println("File details are : ")
+	log.Println("File details are:")
 	log.Println("File name : ", file.Name())
 	log.Println("File size : ", file.Size())
 }
