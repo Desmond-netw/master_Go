@@ -18,7 +18,7 @@ func main() {
 	flag.Parse()
 
 	//get non-flag arguments
-	args := flag.Arg()
+	args := flag.Args()
 
 	if len(args) < 1 {
 		fmt.Println("Usage: fileprocessor -upper -reverse -repeat=3 <file>")
