@@ -34,5 +34,7 @@ func main() {
 		if *uppercase {
 			content = strings.ToUpper(content)
 		}
+		fmt.Println(content)
 	}
+
 }
