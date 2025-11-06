@@ -12,7 +12,7 @@ func main() {
 
 	// define flags
 	uppercase := flag.Bool("upper", false, "convert to upppercase")
-	// reverse := flag.Bool("reverse", false, "reverse the text")
+	reverse := flag.Bool("reverse", false, "reverse the text")
 	// repeat := flag.Bool("repeat", 1, "Number of times to repeat")
 
 	flag.Parse()
@@ -34,7 +34,24 @@ func main() {
 		if *uppercase {
 			content = strings.ToUpper(content)
 		}
-		fmt.Println(content)
+		// check for repeat flag
+		if *reverse {
+			content = reverseString(content)
+		}
+
+		fmt.Printf("%s -> %s\n", filename, content)
 	}
 
+}
+
+func reverseString(str string) string {
+	// reversing strings
+	// converts strings to slice of runes
+	runes := []rune(str)
+
+	for i, j := 0, len(runes)-1; i < j; i, j = i+1, j-1 {
+		runes[i], runes[j] = runes[j], runes[i]
+	}
+	// convert modify runes back to string
+	return string(runes)
 }
