@@ -29,12 +29,13 @@ func main() {
 	arg := flag.Args()
 	if len(arg) < 1 {
 		fmt.Printf("Usage: go run . '[5 #]' ")
+		fmt.Println("Example: go run . '[5 #][5 -_]-[5 #]'")
 		flag.PrintDefaults()
 		os.Exit(1)
 	}
 
 	// let set input to first arguments
-	input := arg[1]
+	input := arg[0]
 
 	// iterate through input to get content and check for openBracket and closeBrackets
 	// remove open brackets and closebrackest
