@@ -1,3 +1,4 @@
+// a network port scanner app
 package main
 
 import (
@@ -6,18 +7,24 @@ import (
 )
 
 func main() {
-	// ip
-	IP := "scanme.nmap.org"
+	// define static ip to scan
+	IP := "scanme.nmap.org" // example: ip address
 	Port := "80"
 
-	address := IP + ":" + Port
+	// to establish connection, let use net package and Dial func to
+	// receive ack from the target IP address
+
+	// dial func uses network and the target address:port
 	network := "tcp"
+	address := IP + ":" + Port // ip:port number
 	connection, err := net.Dial(network, address)
 
+	// let handle some edgecases
 	if err != nil {
-		fmt.Println("connection established fail", IP)
+		fmt.Println("connection establishing failed", IP)
+		return
 	} else {
-		fmt.Println("[+] connection established ...", connection.RemoteAddr().String())
-	}
+		fmt.Println("Connection established ...", connection.RemoteAddr().String()) // this will give us the ip we need
 
+	}
 }
