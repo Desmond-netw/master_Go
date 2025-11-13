@@ -21,6 +21,6 @@ func main() {
 		fmt.Println("Error connection to:", IP)
 	}
 
-	fmt.Println("connecion ...", connection.RemoteAddr().s)
+	fmt.Println("connecion ...", connection.RemoteAddr().String())
 
 }
