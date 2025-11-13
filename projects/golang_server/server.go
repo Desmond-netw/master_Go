@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"log"
 	"net/http"
 )
 
@@ -12,7 +13,10 @@ func main() {
 	})
 
 	http.HandleFunc("/hi", func(w http.ResponseWriter, r *http.Request) {
-		fmt.Fprintf("Here is a Hi page from GO http")
+		fmt.Fprintf(w, "Here is a Hi page from GO http")
 	})
 	//set port
+	port := ":5000"
+	fmt.Println("Server is running on port" + port)
+	log.Fatal(http.ListenAndServe(port, nil))
 }
