@@ -11,16 +11,16 @@ import (
 
 func main() {
 	IP := "scanme.nmap.org"
-	Port := "80" // that http port
+	//Port := "80" // that http port
 
 	// use net/Dial func
-	address := IP + ":" + Port
-	network := "tcp"
-	connection, err := net.Dial(network, address)
-	if err != nil {
-		fmt.Println("Error connection to:", IP)
+	for port := 1; port < 100; port++ {
+
+		address := fmt.Sprintf("%s:%d", IP, port)
+		network := "tcp"
+		connection, err := net.Dial(network, address)
+		if err == nil {
+			fmt.Printf("Connection establish... %v [%s]", port, connection.RemoteAddr().String())
+		}
 	}
-
-	fmt.Println("connecion ...", connection.RemoteAddr().String())
-
 }
