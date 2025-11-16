@@ -1,9 +1,7 @@
 package main
 
 import (
-	"flag"
 	"fmt"
-	"os"
 	"strconv"
 	"strings"
 )
@@ -25,6 +23,28 @@ import (
 
 */
 func decoder(input string) (string, error) {
+	//=---------Global unbalance check-------
+	openCount := 0
+	closeCount := 0
+
+	for _, ch := range input {
+		if ch == '[' {
+			openCount++
+		} else if ch == ']' {
+			closeCount++
+
+			if closeCount > openCount { // closing bracket appearing before open
+				return "", fmt.Errorf("Bracket unbalance")
+			}
+		}
+	}
+
+	// check un balance
+	if openCount != closeCount {
+		return "", fmt.Errorf("Bracket unbalance")
+	}
+
+	//--------------
 	var sb strings.Builder // sb = stringBulder
 	currentIndex := 0
 	inputLength := len(input)
@@ -37,7 +57,7 @@ func decoder(input string) (string, error) {
 		}
 		start := sb + startRel + 1 // position after '['
 
-		// find corresponding ']'
+		// find correspondinag ']'
 		endRel := strings.IndexByte(input[start:], ']')
 		if endRel == -1 {
 			return "", fmt.Errorf("missing closing ']'")
@@ -80,28 +100,4 @@ func decoder(input string) (string, error) {
 	}
 
 	return sb.String(), nil
-}
-
-// main func
-func main() {
-
-	// parse flags
-	flag.Parse()
-	// Initilize flags for cli arguments
-	arg := flag.Args()
-	if len(arg) < 1 {
-		fmt.Printf("Usage: go run . '[5 #]' ")
-		fmt.Println("Example: go run . '[5 #][5 -_]-[5 #]'")
-		flag.PrintDefaults()
-		os.Exit(1)
-	}
-
-	// let set input to first arguments
-	input := arg[0]
-	result, err := decoder(input)
-	if err != nil {
-		fmt.Fprintln(os.Stderr, "decode error:", err)
-		os.Exit(1)
-	}
-	fmt.Println(result)
 }
