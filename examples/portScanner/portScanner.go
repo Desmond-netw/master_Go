@@ -12,7 +12,6 @@ import (
 func main() {
 	IP := "scanme.nmap.org"
 	//Port := "80" // that http port
-
 	// use net/Dial func
 	for port := 1; port < 100; port++ {
 
@@ -20,7 +19,8 @@ func main() {
 		network := "tcp"
 		connection, err := net.Dial(network, address)
 		if err == nil {
-			fmt.Printf("Connection establish... %v [%s]", port, connection.RemoteAddr().String())
+			fmt.Printf("Port %d open! [%s]\n", port, connection.RemoteAddr().String())
+			_ = connection.Close()
 		}
 	}
 }
