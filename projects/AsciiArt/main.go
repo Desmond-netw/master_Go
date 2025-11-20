@@ -29,3 +29,14 @@ func main() {
 	}
 	fmt.Println(result)
 }
+
+// help flag func
+func displayHelp() {
+	fmt.Println("Usage:")
+	fmt.Println("  go run . '[5 $]'               → Decode single input")
+	fmt.Println("  go run . -encode 'argument'     → Encode single input")
+	fmt.Println("  go run . -multiline             → Multi-line decode (add done)")
+	fmt.Println("  go run . -encode -multiline    → Multi-line encode")
+	fmt.Println("  go run . -file=input.txt        → Decode file")
+	fmt.Println("  go run . -encode -file=input.txt → Encode file")
+}
