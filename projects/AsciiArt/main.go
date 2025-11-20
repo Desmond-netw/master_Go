@@ -8,7 +8,11 @@ import (
 
 // main func
 func main() {
-
+	// setting flags for cli such as -multiline
+	help := flag.Bool("help", false, "Display Help")
+	multiline := flag.Bool("multiline", false, "Enable Multiline mode")
+	encodeFlag := flag.Bool("encode", false, "Encoder partten to string")
+	file := flag.String("file", "", "take file input")
 	// parse flags
 	flag.Parse()
 	// Initilize flags for cli arguments
