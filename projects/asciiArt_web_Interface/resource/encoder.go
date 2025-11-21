@@ -17,7 +17,7 @@ import (
 */
 
 // encoding the decodepartten into the form [n char] and leave the rest
-func encoder(input string) (string, error) {
+func Encoder(input string) (string, error) {
 	if len(input) == 1 {
 		return "", fmt.Errorf("empty input")
 	}
@@ -51,7 +51,7 @@ func encoder(input string) (string, error) {
 }
 
 // encode multiple lines reading line by line
-func encodeMultipleLines() {
+func EncodeMultipleLines() {
 	result := []string{}
 	// declare scanner
 	scanner := bufio.NewScanner(os.Stdin)
@@ -71,7 +71,7 @@ func encodeMultipleLines() {
 			os.Exit(1)
 		}
 
-		output, err := encoder(eachline)
+		output, err := Encoder(eachline)
 		result = append(result, output)
 		if err != nil {
 			fmt.Println("error")
@@ -86,7 +86,7 @@ func encodeMultipleLines() {
 }
 
 // encode file parttens
-func encodeFile(filename string) {
+func EncodeFile(filename string) {
 	// open the file name
 	myfile, err := os.Open(filename)
 	if err != nil {
@@ -104,7 +104,7 @@ func encodeFile(filename string) {
 		if line == "" {
 			continue
 		}
-		encoded, err := encoder(line)
+		encoded, err := Encoder(line)
 		if err != nil {
 			fmt.Println("Error encoding")
 			return
