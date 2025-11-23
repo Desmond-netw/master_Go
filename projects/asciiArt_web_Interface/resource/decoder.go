@@ -28,7 +28,7 @@ import (
 // importing package
 
 // decoderPattern
-func decoder(input string) (string, error) {
+func Decoder(input string) (string, error) {
 
 	/* ------------- Global check fo unbalance brackets ----- */
 	openCount := 0
@@ -133,7 +133,7 @@ func decoder(input string) (string, error) {
 
 // decode multiple lines
 // read multiple line from stdin and decodes each separately
-func decodeMultipleLines() {
+func DecodeMultipleLines() {
 	result := []string{}
 	// initilize scanner
 	scanner := bufio.NewScanner(os.Stdin)
@@ -149,7 +149,7 @@ func decodeMultipleLines() {
 		if line == "exit" || line == "EXIT" || line == "end" {
 			os.Exit(0)
 		}
-		output, err := decoder(line)
+		output, err := Decoder(line)
 		result = append(result, output)
 		if err != nil {
 			fmt.Println("error")
@@ -165,7 +165,7 @@ func decodeMultipleLines() {
 
 // decode file mode
 // read multiple line from file and decodes each line
-func decodeFile(filename string) {
+func DecodeFile(filename string) {
 
 	// open the file first
 	file, err := os.Open(filename)
@@ -179,7 +179,7 @@ func decodeFile(filename string) {
 	scanner := bufio.NewScanner(file)
 	for scanner.Scan() {
 		line := scanner.Text()
-		fileResult, err := decoder(line)
+		fileResult, err := Decoder(line)
 		if err != nil {
 			fmt.Println("error")
 			return
