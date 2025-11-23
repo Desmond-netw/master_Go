@@ -75,10 +75,11 @@ func actionHandler(w http.ResponseWriter, req *http.Request) {
 	tmpl.ExecuteTemplate(w, "result.tml", data)
 }
 
-// rendering template func
-func renderTemplate(w http.ResponseWriter, tmpl string) {
-	// Parsing the specified template file bing passed as input
-	t := template.Must(template.ParseFiles("templates/" + tmpl)) // t = template
-	// execute
-	t.Execute(w, nil)
+//---------------------------------
+//      SEVER INITIALIZER
+//---------------------------------
+
+func RunServer() {
+	http.HandleFunc("/", homeHandler)
+	http.HandleFunc("/process", actionHandler)
 }
