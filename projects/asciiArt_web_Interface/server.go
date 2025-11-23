@@ -23,45 +23,56 @@ func homeHandler(w http.ResponseWriter, req *http.Request) {
 }
 
 // server handler function
-func handler(w http.ResponseWriter, req *http.Request) pageData {
+func actionHandler(w http.ResponseWriter, req *http.Request) {
 
 	if req.Method != http.MethodPost {
 		http.Redirect(w, req, "/", http.StatusSeeOther)
-		return pageData{
-			Error: "",
-		}
+		return
 	}
 
-	// Render the home page
-	http.HandleFunc("/", homepage)
-
-	// get request input from client side and store their values
+	// get request input value from client side and store their values
 	inputText := req.FormValue("inputText")
-	modeAction := req.FormValue("action")
+	mode := req.FormValue("action")
 
-	// set variables
-	myresult := string
-	data := pageData{}
+	data := PageData{}
 
 	// validate inputText
 	if inputText == "" {
 		w.WriteHeader(http.StatusBadRequest)
-		data.Error = "Please select either Decoder or Encoder"
-		tmpl.Execute(w, data)
-	}
-	//pass data to result
-	if modeAction == "decode" {
-		myresult, err = resource.Decoder(inputText)
-	} else if modeAction == "encode" {
-		myresult, err = resource.Encoder(inputText)
+		data.Error = "Input cannot be empty"
+		tmpl.ExecuteTemplate(w, "index.html", data)
 	}
 
+	// store result and err
+	var (
+		result string
+		err    error
+	)
+
+	// process the mode and data
+	switch mode {
+	case "decode":
+		result, err = resource.Decoder(inputText)
+	case "encode":
+		result, err = resource.Encoder(inputText)
+	default:
+		data.Error = "Invalid action selected"
+		tmpl.ExecuteTemplate(w, "index.html", data)
+		return
+	}
+
+	// handle error when processing mode
 	if err != nil {
 		w.WriteHeader(http.StatusBadRequest)
 		data.Error = err.Error()
+		tmpl.ExecuteTemplate(w, "index.html", data)
+		return
 	}
 
-	return pageData{}
+	data.Result = result
+	data.Status = "success"
+
+	tmpl.ExecuteTemplate(w, "result.tml", data)
 }
 
 // rendering template func
