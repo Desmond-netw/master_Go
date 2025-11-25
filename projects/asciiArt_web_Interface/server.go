@@ -1,8 +1,10 @@
 package main
 
 import (
+	"fmt"
 	"html/template"
 	"interface/resource"
+	"log"
 	"net/http"
 )
 
@@ -82,4 +84,8 @@ func actionHandler(w http.ResponseWriter, req *http.Request) {
 func RunServer() {
 	http.HandleFunc("/", homeHandler)
 	http.HandleFunc("/process", actionHandler)
+
+	// server
+	fmt.Println("Server running at http://localhost:8080")
+	log.Fatal(http.ListenAndServe(":8080", nil))
 }
