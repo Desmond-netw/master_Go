@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Result</title>
+
+    <style>
+        body {
+            background: #f1f3f6;
+            margin: 0;
+            font-family: Consolas, "Courier New", monospace;
+        }
+
+        .container {
+            max-width: 700px;
+            margin: 60px auto;
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0px 4px 18px rgba(0, 0, 0, 0.12);
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 25px;
+        }
+
+        pre {
+            background: #1d1f21;
+            color: #c2f2d0;
+            padding: 20px;
+            border-radius: 10px;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            font-size: 15px;
+            border-left: 6px solid #00c853;
+        }
+
+        .btn {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            margin-top: 25px;
+            background: #0077ff;
+            color: white;
+            text-align: center;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 16px;
+            transition: 0.25s;
+        }
+
+        .btn:hover {
+            background: #005ad1;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Result</h2>
+
+    <pre>{{.Result}}</pre>
+
+    <a href="/" class="btn">Back</a>
+</div>
+
+</body>
+</html>

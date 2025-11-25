@@ -21,7 +21,7 @@ type PageData struct {
 // Homepage route handler for home rendering
 func homeHandler(w http.ResponseWriter, req *http.Request) {
 
-	tmpl.ExecuteTemplate(w, "index.html", nil)
+	tmpl.ExecuteTemplate(w, "index.gohtml", nil)
 }
 
 // server handler function
@@ -42,7 +42,7 @@ func actionHandler(w http.ResponseWriter, req *http.Request) {
 	if inputText == "" {
 		w.WriteHeader(http.StatusBadRequest)
 		data.Error = "Input cannot be empty"
-		tmpl.ExecuteTemplate(w, "index.html", data)
+		tmpl.ExecuteTemplate(w, "index.gohtml", data)
 	}
 
 	// store result and err

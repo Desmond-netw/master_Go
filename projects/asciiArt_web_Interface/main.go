@@ -17,7 +17,7 @@ func main() {
 	decodeflag := flag.Bool("decode", false, "decode input")
 	encodeflag := flag.Bool("encode", false, "encode input")
 	//multiline := flag.Bool("multiline", false, "Enable multiline mode")
-	//serverflag := flag.Bool("server", false, "Display web interface")
+	server := flag.Bool("server", false, "Display web interface")
 
 	flag.Parse()
 
@@ -27,5 +27,10 @@ func main() {
 		return
 	}
 	// decodeflag
+	if *server {
+		fmt.Println("Starting web server...")
+		RunServer()
+		return
+	}
 
 }
