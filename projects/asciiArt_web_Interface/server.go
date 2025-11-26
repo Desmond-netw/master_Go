@@ -9,7 +9,11 @@ import (
 )
 
 // Template glob
-var tmpl = template.Must(template.ParseGlob("templates/*.html"))
+var tmpl *template.Template
+
+func init() {
+	tmpl = template.Must(template.ParseGlob("templates/*.html"))
+}
 
 // Page data structure
 type PageData struct {
@@ -21,7 +25,7 @@ type PageData struct {
 // Homepage route handler for home rendering
 func homeHandler(w http.ResponseWriter, req *http.Request) {
 
-	tmpl.ExecuteTemplate(w, "index.gohtml", nil)
+	tmpl.ExecuteTemplate(w, "index.html", nil)
 }
 
 // server handler function
