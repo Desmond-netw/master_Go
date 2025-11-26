@@ -33,13 +33,13 @@ func actionHandler(w http.ResponseWriter, req *http.Request) {
 	}
 
 	// get request input value from client side and store their values
-	inputText := req.FormValue("inputText")
-	mode := req.FormValue("action")
+	InputText := req.FormValue("inputText")
+	Mode := req.FormValue("action")
 
 	data := PageData{}
 
-	// validate inputText
-	if inputText == "" {
+	// validate InputText
+	if InputText == "" {
 		w.WriteHeader(http.StatusBadRequest)
 		data.Error = "Input cannot be empty"
 		tmpl.ExecuteTemplate(w, "index.gohtml", data)
@@ -51,19 +51,19 @@ func actionHandler(w http.ResponseWriter, req *http.Request) {
 		err    error
 	)
 
-	// process the mode and data
-	switch mode {
+	// process the Mode and data
+	switch Mode {
 	case "decode":
-		result, err = resource.Decoder(inputText)
+		result, err = resource.Decoder(InputText)
 	case "encode":
-		result, err = resource.Encoder(inputText)
+		result, err = resource.Encoder(InputText)
 	default:
 		data.Error = "Invalid action selected"
 		tmpl.ExecuteTemplate(w, "index.html", data)
 		return
 	}
 
-	// handle error when processing mode
+	// handle error when processing Mode
 	if err != nil {
 		w.WriteHeader(http.StatusBadRequest)
 		data.Error = err.Error()
