@@ -46,7 +46,7 @@ func actionHandler(w http.ResponseWriter, req *http.Request) {
 	if InputText == "" {
 		w.WriteHeader(http.StatusBadRequest)
 		data.Error = "Input cannot be empty"
-		tmpl.ExecuteTemplate(w, "index.gohtml", data)
+		tmpl.ExecuteTemplate(w, "/", data)
 	}
 
 	// store result and err
@@ -62,8 +62,8 @@ func actionHandler(w http.ResponseWriter, req *http.Request) {
 	case "encode":
 		result, err = resource.Encoder(InputText)
 	default:
-		data.Error = "Invalid action selected"
-		tmpl.ExecuteTemplate(w, "index.html", data)
+		data.Error = "Invalid action sel ected"
+		tmpl.ExecuteTemplate(w, "/", data)
 		return
 	}
 
@@ -71,14 +71,19 @@ func actionHandler(w http.ResponseWriter, req *http.Request) {
 	if err != nil {
 		w.WriteHeader(http.StatusBadRequest)
 		data.Error = err.Error()
-		tmpl.ExecuteTemplate(w, "index.html", data)
+		tmpl.ExecuteTemplate(w, "/", data)
 		return
 	}
 
 	data.Result = result
 	data.Status = "success"
 
-	tmpl.ExecuteTemplate(w, "result.tml", data)
+	err = tmpl.ExecuteTemplate(w, "process.html", data)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		log.Fatal(err)
+		return
+	}
 }
 
 //---------------------------------
@@ -89,6 +94,8 @@ func RunServer() {
 	http.HandleFunc("/", homeHandler)
 	http.HandleFunc("/process", actionHandler)
 
+	// get style from /static
+	http.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("static"))))
 	// server
 	fmt.Println("Server running at http://localhost:8080")
 	log.Fatal(http.ListenAndServe(":8080", nil))
