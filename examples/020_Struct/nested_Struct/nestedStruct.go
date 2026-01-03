@@ -7,10 +7,27 @@ package main
 type Author struct {
 	name   string
 	editor string
-	year   string
+	year   int
 }
 
 type Book struct {
-	author Author // nested structure
-	store  string
+	Title    string
+	author   Author // nested structure
+	location string
+}
+
+func main() {
+	// getting Book details
+	shells := Book{
+		Title:    "Ananse In the Land of idiot ",
+		location: "Techiman Book Shop",
+		author:   Author{"Peter John", "PrintX", 2000},
+	}
+
+	// print out shells
+	details := &shells
+
+	println("Title:,", (*details).Title)
+	println("Author: ", (*details).author)
+	println("Store Lacated at : ", (*details).location)
 }
