@@ -3,6 +3,7 @@ package main
 import (
 	"bufio"
 	"os"
+	"strings"
 )
 
 // func to read user inputs
@@ -14,5 +15,5 @@ func Reader() string {
 	// reading the input
 	text, _ := reader.ReadString('\n')
 
-	return text
+	return strings.TrimSpace(text)
 }
