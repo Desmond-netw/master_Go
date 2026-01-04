@@ -28,6 +28,8 @@ func main() {
 	details := &shells
 
 	println("Title:,", (*details).Title)
-	println("Author: ", (*details).author)
 	println("Store Lacated at : ", (*details).location)
+
+	//Printing nested Struct
+	println("Author: ", (*details).author.name)
 }
