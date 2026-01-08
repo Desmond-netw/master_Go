@@ -1,8 +1,6 @@
 package main
 
 import (
-	"encoding/json"
-	"fmt"
 	"net/http"
 )
 
@@ -23,19 +21,11 @@ type Item struct {
 	Image string `json:"image,omitempty"`
 }
 
-func fetchItems(endpoint string) ([]Item, error) {
-	resp, err := http.Get(APIURL + endpoint)
-	if err != nil {
-		return nil, err
-	}
-	defer resp.Body.Close()
+func main() {
+	http.HandleFunc("/", homeHandler)
+	http.HandleFunc("/models", listhandler("/models", "Car Models"))
+	http.HandleFunc("/manufacturers", listhandler("/manufacturers", "manufacturers"))
+	http.HandleFunc("/categories", listhandler("/categories", "categories"))
 
-	if resp.StatusCode != http.StatusOK {
-		fmt.Errorf("HTTP status : %s", resp.Status)
-	}
-
-	// var items to items struct
-	var items []Item
-	err = json.NewDecoder(resp.Body).Decode(&items)
-	return items, err
+	http.ListenAndServe(":8080", nil)
 }
