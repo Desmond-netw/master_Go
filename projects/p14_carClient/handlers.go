@@ -5,16 +5,15 @@ import (
 	"net/http"
 )
 
-// handler for templates
+// templates
 var templates = template.Must(
 	template.ParseGlob("templates/*.html"),
 )
 
-// home page handler
-func homeHandler(wr http.ResponseWriter, req *http.Request) {
-	templates.ExecuteTemplate(wr, "layout.html", nil)
-}
-
+// Handling list of API
+// Making sure
+// API data ->Go struct
+// Go struct - HTML Templates
 func listhandler(endpoint string, title string) http.HandlerFunc {
 	return func(w http.ResponseWriter, req *http.Request) {
 		items, err := fetchItems(endpoint)
@@ -36,4 +35,9 @@ func listhandler(endpoint string, title string) http.HandlerFunc {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 		}
 	}
+}
+
+// home page handler
+func homeHandler(wr http.ResponseWriter, req *http.Request) {
+	templates.ExecuteTemplate(wr, "layout.html", nil)
 }
