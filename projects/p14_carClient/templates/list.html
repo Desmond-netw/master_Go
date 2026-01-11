@@ -1,13 +1,23 @@
-{{ define "content" }}
-<h2>{{ .Title }}</h2>
+{{define "content"}}
 
-{{ if .Items }}
-<ul>
-    {{ range .Items }}
-        <li>{{ .Name }}</li>
-    {{ end }}
-</ul>
-{{ else }}
-<p>No data found.</p>
-{{ end }}
-{{ end }}
+<h2>{{.Title}}</h2>
+
+{{if .Items}} 
+    <table border="1" cellpadding="6">
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+        </tr>
+
+        {{range .Items}}
+            <tr>
+                <td>{{.ID}}</td>
+                <td>{{.Name}}</td>
+            </tr>
+        {{end}}
+    </table>
+{{else}}
+<h2>No Data returned from API .err</h2>
+{{end}}  <!-- end of Items-->
+
+{{end}}  <!--- End of define content-->
