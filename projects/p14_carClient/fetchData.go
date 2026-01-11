@@ -38,7 +38,7 @@ const APIURL = "http://localhost:3000/api"
 // 	return items, err
 // }
 
-// fetch Models from stuch
+// fetch car Models from json data and decode to struct
 func fetchModel() ([]CarModel, error) {
 	resp, err := http.Get(APIURL + "/models")
 	if err != nil {
