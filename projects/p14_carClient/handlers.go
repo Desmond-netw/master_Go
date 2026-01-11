@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"html/template"
 	"net/http"
 )
@@ -12,29 +13,30 @@ var templates = template.Must(
 
 // Handling list of API
 // Making sure
-// API data ->Go struct
+// JSON API data ->Go struct
 // Go struct - HTML Templates
-func listhandler(endpoint string, title string) http.HandlerFunc {
-	return func(w http.ResponseWriter, req *http.Request) {
-		items, err := fetchItems(endpoint)
-		if err != nil {
-			http.Error(w, "failed to fetch data", http.StatusInternalServerError)
-			return
-		}
 
-		data := struct {
-			Title string
-			Items []Item
-		}{
-			Title: title,
-			Items: items,
-		}
-
-		err = templates.ExecuteTemplate(w, "layout.html", data)
-		if err != nil {
-			http.Error(w, err.Error(), http.StatusInternalServerError)
-		}
+// MODEL HANDLER
+func modelsHandler(wr http.ResponseWriter, req *http.Request) {
+	models, err := fetchModel()
+	if err != nil {
+		http.Error(wr, err.Error(), http.StatusInternalServerError)
+		return
 	}
+
+	fmt.Println("Models fetchd", len(models))
+	carsData := struct {
+		Title  string
+		Models []CarModel
+	}{
+		Title:  "Car Model",
+		Models: models,
+	}
+
+	templates.ExecuteTemplate(wr, "layout.html", carsData)
+	// if err != nil {
+	// 	http.Error(wr, err.Error(), http.StatusInternalServerError)
+	// }
 }
 
 // home page handler
