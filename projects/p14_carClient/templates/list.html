@@ -1,23 +1,24 @@
 {{define "content"}}
-
 <h2>{{.Title}}</h2>
 
-{{if .Items}} 
-    <table border="1" cellpadding="6">
-        <tr>
-            <th>ID</th>
-            <th>Name</th>
-        </tr>
+{{range .Models}}
+    <div style="border:1px solid #ccc; padding:10px; margin:10px;">
+        <h3>{{.Name}} ({{.Year}})</h3>
+        <p>
+            <strong>Maufacturer ID:</strong> {{.ManufacturerID}} <br>
+            <strong>Category ID:</strong> {{.CategoryId}} 
+        </p>
 
-        {{range .Items}}
-            <tr>
-                <td>{{.ID}}</td>
-                <td>{{.Name}}</td>
-            </tr>
+        <h4>Specifications</h4>
+        <ul>
+            <li>Engine: {{.Specifications.Engine}}</li>
+            <li>Horsepower: {{.Specifications.Horsepower}} HP</li>
+            <li>Transmission: {{.Specifications.Transmission}}</li>
+            <li>Drivetrain: {{.Specifications.Drivetrain}}</li>
+        </ul>
+        {{if .Image}}
+            <img src="http://localhost:3000/api/images/{{.Image }}" width="200" height="200" >
         {{end}}
-    </table>
-{{else}}
-<h2>No Data returned from API .err</h2>
-{{end}}  <!-- end of Items-->
-
-{{end}}  <!--- End of define content-->
+    </div>
+{{end}} <!-- end range models-->
+{{end}} <!-- end define content-->
