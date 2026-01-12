@@ -13,17 +13,19 @@ type PageData struct {
 
 func main() {
 	http.HandleFunc("/", home)
+	http.ListenAndServe(":4000", nil)
+
 }
 
 // Global scope
 
 // home handler
 func home(w http.ResponseWriter, r *http.Request) {
-	renderTemplate(w, "home.html")
+	renderTemplate(w, "home.html", PageData{Title: "Admin", User: "Analyst"})
 }
 
 // renderTemplate
-func renderTemplate(w http.ResponseWriter, tmpl string) {
+func renderTemplate(w http.ResponseWriter, tmpl string, data interface{}) {
 	// Template ParseFiles html file to be rendered
 	tpl, err := template.ParseFiles("templates/" + tmpl)
 	if err != nil {
@@ -31,6 +33,6 @@ func renderTemplate(w http.ResponseWriter, tmpl string) {
 		return
 	}
 
-	tpl.Execute(w, nil)
+	tpl.Execute(w, data)
 
 }
