@@ -30,11 +30,8 @@ func modelsHandler(wr http.ResponseWriter, req *http.Request) {
 	}
 
 	fmt.Println("Models fetchd", len(models))
-	carsData := struct {
-		Title  string
-		Models []CarModel
-	}{
-		Title:  "Car Model",
+	carsData := PageData{
+		Title:  "Car Models",
 		Models: models,
 	}
 
@@ -50,11 +47,9 @@ func manufacturerHandler(wr http.ResponseWriter, req *http.Request) {
 		return
 	}
 
-	manufacturerData := struct {
-		Title         string
-		Manufacturers []Manufacturer
-	}{
-		Title:         "Manufacturers",
+	fmt.Println("Manufacturers fetch", len(manufacturer)) // sending signal to cli
+	manufacturerData := PageData{
+		Title:         "Car Manufacturers",
 		Manufacturers: manufacturer,
 	}
 
@@ -63,13 +58,28 @@ func manufacturerHandler(wr http.ResponseWriter, req *http.Request) {
 
 }
 
+func categoryHandler(wr http.ResponseWriter, req *http.Request) {
+	category, err := fetchCategory()
+	if err != nil {
+		http.Error(wr, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	fmt.Println("category fetch", len(category))
+	categoryData := PageData{
+		Title:      "Car Category",
+		Categories: category,
+	}
+
+	renderTemplate(wr, "layout.html", categoryData)
+
+}
+
 // func to handle template rendering
-func renderTemplate(wr http.ResponseWriter, tmpl string, data any) {
+func renderTemplate(wr http.ResponseWriter, tmpl string, data interface{}) {
 	//passing specific html templates
-	tpl, err := template.ParseFiles("templates/" + tmpl)
+	err := templates.ExecuteTemplate(wr, tmpl, data)
 	if err != nil {
 		http.Error(wr, err.Error(), http.StatusInternalServerError)
 	}
-
-	tpl.Execute(wr, data)
 }
