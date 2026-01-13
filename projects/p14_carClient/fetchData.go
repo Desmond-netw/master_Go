@@ -18,6 +18,33 @@ const APIURL = "http://localhost:3000/api"
 
 // Fetching API Data
 
+// fetch car Models from json data and decode to Go struct
+func fetchModel() ([]CarModel, error) {
+	resp, err := http.Get(APIURL + "/models")
+	if err != nil {
+		return nil, err
+	}
+	defer resp.Body.Close()
+
+	var models []CarModel
+	err = json.NewDecoder(resp.Body).Decode(&models)
+	return models, err
+}
+
+/* ---------- Fetch Manufacturers data from API ------*/
+
+func fetchManufacturers() ([]Manufacturer, error) {
+	resp, err := http.Get(APIURL + "/manufacturers")
+	if err != nil {
+		return nil, err
+	}
+	defer resp.Body.Close() // close response body
+
+	var manufacturers []Manufacturer                        // var to store address manuf
+	err = json.NewDecoder(resp.Body).Decode(&manufacturers) // decoding json data from resp.body to Go struct
+	return manufacturers, err
+}
+
 // func fetchItems(endpoint string) ([]Item, error) {
 // 	baseURL := APIURL + endpoint // base url will be /api/models
 // 	println("fetching url:", baseURL)
@@ -37,16 +64,3 @@ const APIURL = "http://localhost:3000/api"
 
 // 	return items, err
 // }
-
-// fetch car Models from json data and decode to struct
-func fetchModel() ([]CarModel, error) {
-	resp, err := http.Get(APIURL + "/models")
-	if err != nil {
-		return nil, err
-	}
-	defer resp.Body.Close()
-
-	var models []CarModel
-	err = json.NewDecoder(resp.Body).Decode(&models)
-	return models, err
-}
