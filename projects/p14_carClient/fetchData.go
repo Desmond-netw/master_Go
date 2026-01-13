@@ -45,6 +45,19 @@ func fetchManufacturers() ([]Manufacturer, error) {
 	return manufacturers, err
 }
 
+/*----------- Fetching categories data*/
+func fetchCategory() ([]Category, error) {
+	resp, err := http.Get(APIURL + "/categories")
+	if err != nil {
+		return nil, err
+	}
+	defer resp.Body.Close() // close response body
+
+	var categories []Category
+	err = json.NewDecoder(resp.Body).Decode(&categories)
+	return categories, err
+}
+
 // func fetchItems(endpoint string) ([]Item, error) {
 // 	baseURL := APIURL + endpoint // base url will be /api/models
 // 	println("fetching url:", baseURL)
