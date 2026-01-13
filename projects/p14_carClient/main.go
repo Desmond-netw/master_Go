@@ -8,8 +8,8 @@ import (
 func main() {
 	http.HandleFunc("/", homeHandler)
 	http.HandleFunc("/models", modelsHandler)
-	http.HandleFunc("/manufacturers", modelsHandler)
-	http.HandleFunc("/categories", modelsHandler)
+	http.HandleFunc("/manufacturers", manufacturerHandler)
+	http.HandleFunc("/categories", categoryHandler)
 
 	fmt.Println("Starting Server.....")
 	fmt.Println("http://localhost:8080")
