@@ -1,6 +1,6 @@
 {{define "content"}}
 <h2>{{.Title}}</h2>
-
+{{if .Models}}
 {{range .Models}}
     <div style="border:1px solid #ccc; padding:10px; margin:10px;">
         <h3>{{.Name}} ({{.Year}})</h3>
@@ -20,5 +20,23 @@
             <img src="http://localhost:3000/api/images/{{.Image }}" width="200" height="200" >
         {{end}}
     </div>
+{{end}} 
 {{end}} <!-- end range models-->
+{{if .Manufacturers}}
+    <table >
+        <tr>
+            <th>Name</th>
+            <th>Country</th>
+            <th>Founded</th>
+        </tr>
+        {{range .Manufacturers}} 
+            <tr>
+                <td>{{ .Name}}</td>
+                <td>{{ .Country}}</td>
+                <td>{{ .FoundingYear}}</td>
+            </tr>
+        {{end}}
+    </table>
+{{end}} <!-- End of Manufacturers-->
+<!-- ----------- -->
 {{end}} <!-- end define content-->
