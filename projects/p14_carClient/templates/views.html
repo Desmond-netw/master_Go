@@ -39,4 +39,17 @@
     </table>
 {{end}} <!-- End of Manufacturers-->
 <!-- ----------- -->
+ {{if .Categories}}
+    <table>
+        <tr>
+            <th>Name</th>
+        </tr>
+        {{range .Categories}}
+            <tr>
+                <td>{{.Name}}
+                </td>
+            </tr>
+        {{end}}
+    </table>
+{{end}}
 {{end}} <!-- end define content-->
