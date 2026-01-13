@@ -16,7 +16,12 @@ var templates = template.Must(
 // JSON API data ->Go struct
 // Go struct - HTML Templates
 
-// MODEL HANDLER
+// home page handler
+func homeHandler(wr http.ResponseWriter, req *http.Request) {
+	renderTemplate(wr, "layout.html", nil)
+}
+
+// Model handler to send model data to html templ
 func modelsHandler(wr http.ResponseWriter, req *http.Request) {
 	models, err := fetchModel()
 	if err != nil {
@@ -33,13 +38,16 @@ func modelsHandler(wr http.ResponseWriter, req *http.Request) {
 		Models: models,
 	}
 
-	templates.ExecuteTemplate(wr, "layout.html", carsData)
-	// if err != nil {
-	// 	http.Error(wr, err.Error(), http.StatusInternalServerError)
-	// }
+	renderTemplate(wr, "layout.html", carsData)
 }
 
-// home page handler
-func homeHandler(wr http.ResponseWriter, req *http.Request) {
-	templates.ExecuteTemplate(wr, "layout.html", nil)
+// func to handle template rendering
+func renderTemplate(wr http.ResponseWriter, tmpl string, data any) {
+	//passing specific html templates
+	tpl, err := template.ParseFiles("templates/" + tmpl)
+	if err != nil {
+		http.Error(wr, err.Error(), http.StatusInternalServerError)
+	}
+
+	tpl.Execute(wr, data)
 }
