@@ -33,3 +33,11 @@ type CarModel struct {
 	Specifications Specifications `json:"specification"`
 	Image          string         `json:"image"`
 }
+
+// Page data struct
+type PageData struct {
+	Title         string
+	Models        []CarModel
+	Manufacturers []Manufacturer
+	Categories    []Category
+}
