@@ -32,6 +32,9 @@ type CarModel struct {
 	Year           int            `json:"year"`
 	Specifications Specifications `json:"specification"`
 	Image          string         `json:"image"`
+	// other Data not from api
+	ManufacturerName string
+	CategoryName     string
 }
 
 // Page data struct
