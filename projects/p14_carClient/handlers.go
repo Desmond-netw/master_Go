@@ -29,6 +29,18 @@ func modelsHandler(wr http.ResponseWriter, req *http.Request) {
 		return
 	}
 
+	manufacturers, _ := fetchManufacturers()
+	categories, _ := fetchCategory()
+
+	manMap := manufacturerMap(manufacturers)
+	catMap := categoryMap(categories)
+
+	// join data here
+	for i := range models {
+		models[i].ManufacturerName = manMap[models[i].ManufacturerID]
+		models[i].CategoryName = catMap[models[i].CategoryId]
+	}
+
 	fmt.Println("Models fetchd", len(models))
 	carsData := PageData{
 		Title:  "Car Models",
