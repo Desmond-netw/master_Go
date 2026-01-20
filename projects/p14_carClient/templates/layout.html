@@ -3,17 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Car Delar</title>
+    <title>{{.Title}}</title>
+    <!-- Link -->
+     <link rel="stylesheet" href="/static/style.css">
 </head>
 <body>
-     <h1> Cars API CLIENT</h1>
-     <nav>
-        <a href="/">Home</a>
-        <a href="/models">Models</a>
-        <a href="/manufacturers">Manufacturers</a>
-        <a href="/categories">Categories</a>
-     </nav>
-     <hr>
-     {{template  "content" .}}
+     <header>
+        <div>
+            <!-- search -->
+             <input type="search" placeholder="search ..">
+        </div>
+        <nav>
+           <a href="/">Home</a>
+           <a href="/models">Models</a>
+           <a href="/manufacturers">Manufacturers</a>
+           <a href="/categories">Categories</a>
+        </nav>
+     </header>
+    <main>
+        {{template  "content".}}
+    </main>
+     
 </body>
 </html>
