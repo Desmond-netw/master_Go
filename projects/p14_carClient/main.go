@@ -11,6 +11,8 @@ func main() {
 	http.HandleFunc("/manufacturers", manufacturerHandler)
 	http.HandleFunc("/categories", categoryHandler)
 
+	http.Handle("/static/", http.StripPrefix("/static/", http.FileServer((http.Dir("static")))))
+
 	fmt.Println("Starting Server.....")
 	fmt.Println("http://localhost:8080")
 	http.ListenAndServe(":8080", nil)
