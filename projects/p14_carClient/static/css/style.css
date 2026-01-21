@@ -1,0 +1,88 @@
+/* -------- Global reset -------- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+body {
+    background-color: #f4f6f8;
+    color: #000;
+}
+
+/* -------- Header -------- */
+header {
+    background-color: #222121;
+    width: 100%;
+    height: 60px;
+    padding: 0 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+}
+
+/* -------- Main layout -------- */
+main {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    align-items: center;
+    width: 100%;
+    padding: 20px;
+    background-color: #ffffff;
+}
+
+/* -------- Menu Bar -------- */
+.menuBar {
+    display: flex;
+    gap: 20px;
+    list-style: none;
+    padding: 12px 20px;
+    background-color: #1e293b;
+    border-radius: 8px;
+}
+
+/* Menu items */
+.menuBar li {
+    display: flex;
+    align-items: center;
+}
+
+/* Menu links */
+.menuBar li a {
+    padding: 8px 16px;
+    text-decoration: none;
+    font-weight: bold;
+    color: #e5e7eb;
+    border-radius: 6px;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+/* Hover effect */
+.menuBar li a:hover {
+    background-color: #334155;
+    color: #ffffff;
+}
+
+/* -- Contents csss */
+.carContainer {
+     display: gird;
+     grid-template-columns:auto auto;
+     gap: 20px;
+     width: 100%;
+     max-width: 1200px;
+     margin: 0 auto;
+     padding: 20px;
+     background-color: dodgerblue;
+}
+.container .car-card {
+     background-color: #f1f1f1;
+     border: 1px solid #ddd;
+     padding: 20px;
+     border-radius: 8px;
+     box-shadow: 0 2px 6px rgba(0, 0,0, 0.1);
+     
+}
+
