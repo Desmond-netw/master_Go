@@ -9,19 +9,22 @@
 </head>
 <body>
      <header>
-        <div>
+        <div class="search">
             <!-- search -->
              <input type="search" placeholder="search ..">
         </div>
-        <nav>
-           <a href="/">Home</a>
-           <a href="/models">Models</a>
-           <a href="/manufacturers">Manufacturers</a>
-           <a href="/categories">Categories</a>
-        </nav>
      </header>
     <main>
-        {{template  "content".}}
+        <ul class="menuBar">
+           <li><a href="/">Home</a></li>
+           <li><a href="/models">Models</a></li>
+           <li><a href="/manufacturers">Manufacturers</a></li>
+           <li><a href="/categories">Categories</a></li>
+        </ul>
+        <div class="Contents">
+            {{template  "content".}}
+        </div>
+        
     </main>
      
 </body>
