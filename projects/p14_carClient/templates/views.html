@@ -1,12 +1,13 @@
 {{define "content"}}
 <h2>{{.Title}}</h2>
 <!-- ------------------- -->
- <!--      Car Models -->
+ <!--      Car Models Views -->
  <!-- --------------------- -->
-<div class="carContainer">
+
 {{if .Models}}
+<div class="carContainer">
 {{range .Models}}
-    <div class="car-card" >
+    <div class="carWrapper" >
         <h3>{{.Name}} ({{.Year}})</h3>
         <p>
             <strong>Maufacturer :</strong> {{.ManufacturerName}} <br>
@@ -25,11 +26,12 @@
         {{end}}
     </div>
 {{end}} 
-{{end}} <!-- end range models-->
 </div>
+{{end}} <!-- end range models-->
+
 
 <!-- ------------------- -->
- <!--      Car Models -->
+ <!--     Manufacturers Views -->
  <!-- --------------------- -->
 {{if .Manufacturers}}
     <table  >
