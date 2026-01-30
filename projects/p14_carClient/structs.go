@@ -44,3 +44,14 @@ type PageData struct {
 	Manufacturers []Manufacturer
 	Categories    []Category
 }
+
+type homePageData struct {
+	Title string
+
+	//searc
+	SearchQuery        string
+	SearchHasNoResults bool
+
+	FilteredCategories    []Category
+	FilteredManufacturers []Manufacturer
+}
