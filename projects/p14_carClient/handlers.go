@@ -18,7 +18,39 @@ var templates = template.Must(
 
 // home page handler
 func homeHandler(wr http.ResponseWriter, req *http.Request) {
-	renderTemplate(wr, "layout.html", nil)
+
+	var filteredCategories []Category
+	var filteredManufacturers []Manufacturer
+
+	cat, modes, manus := LoadData()
+
+	//filter available cars by category
+	for _, category := range cat {
+		for _, carModel := range modes {
+			if carModel.CategoryId == category.ID {
+				filteredCategories = append(filteredCategories, category)
+				break
+			}
+		}
+	}
+
+	// filter available cars by manufactures
+	for _, manufacture := range manus {
+		for _, carModel := range modes {
+			if carModel.ManufacturerID == manufacture.ID {
+				filteredManufacturers = append(filteredManufacturers, manufacture)
+				break
+			}
+		}
+	}
+
+	// passing filtered
+	homedata := homePageData{
+		FilteredCategories:    filteredCategories,
+		FilteredManufacturers: filteredManufacturers,
+	}
+	wr.WriteHeader(http.StatusOK)
+	renderTemplate(wr, "layout.html", homedata)
 }
 
 // Model handler to send model data to html templ
