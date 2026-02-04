@@ -44,11 +44,12 @@ func LoadData() ([]Category, []CarModel, []Manufacturer) {
 		manuChanel <- manufacturers
 	}()
 
-	categories := <-catChanel
-	models := <-carModelChanel
-	manufacturers := <-manuChanel
+	// waiting to catch responses
+	cat := <-catChanel
+	modes := <-carModelChanel
+	manus := <-manuChanel
 
-	return categories, models, manufacturers
+	return cat, modes, manus
 }
 
 // fetch car Models from json data and decode to Go struct
