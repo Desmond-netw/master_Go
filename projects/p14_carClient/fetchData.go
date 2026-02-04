@@ -18,6 +18,39 @@ const APIURL = "http://localhost:3000/api"
 
 // Fetching API Data
 
+/*
+	Fetch data in Paraller & launch three goroutines,
+
+each loading data from it's API endpoint
+*/
+func LoadData() ([]Category, []CarModel, []Manufacturer) {
+	catChanel := make(chan []Category)
+	carModelChanel := make(chan []CarModel)
+	manuChanel := make(chan []Manufacturer)
+
+	// load each data set
+	go func() {
+		categories, _ := fetchCategory()
+		catChanel <- categories
+	}()
+
+	go func() {
+		carModels, _ := fetchModel()
+		carModelChanel <- carModels
+	}()
+
+	go func() {
+		manufacturers, _ := fetchManufacturers()
+		manuChanel <- manufacturers
+	}()
+
+	categories := <-catChanel
+	models := <-carModelChanel
+	manufacturers := <-manuChanel
+
+	return categories, models, manufacturers
+}
+
 // fetch car Models from json data and decode to Go struct
 func fetchModel() ([]CarModel, error) {
 	resp, err := http.Get(APIURL + "/models")
