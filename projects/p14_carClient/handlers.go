@@ -48,7 +48,6 @@ func homeHandler(wr http.ResponseWriter, req *http.Request) {
 
 	// passing filtered
 	data := homePageData{
-		Title:                 "Home",
 		Page:                  "home",
 		FilteredCategories:    filteredCategories,
 		FilteredManufacturers: filteredManufacturers,
@@ -79,7 +78,6 @@ func modelsHandler(wr http.ResponseWriter, req *http.Request) {
 
 	fmt.Println("Models fetch", len(models))
 	data := PageData{
-		Title:  "Car Models",
 		Page:   "models",
 		Models: models,
 	}
@@ -100,7 +98,6 @@ func manufacturerHandler(wr http.ResponseWriter, req *http.Request) {
 
 	fmt.Println("Manufacturers fetch", len(manufacturer)) // sending signal to cli
 	data := PageData{
-		Title:         "Car Manufacturers",
 		Page:          "manufacturers",
 		Manufacturers: manufacturer,
 	}
@@ -122,7 +119,6 @@ func categoryHandler(wr http.ResponseWriter, req *http.Request) {
 
 	fmt.Println("category fetch", len(category))
 	data := PageData{
-		Title:      "Car Category",
 		Page:       "categories",
 		Categories: category,
 	}
