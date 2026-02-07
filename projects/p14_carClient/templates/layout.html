@@ -1,9 +1,10 @@
+{{ define "layout" }}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{.Title}}</title>
+    <title>{{block "titile" . }}Car Client {{end}}</title>
     <!-- Link -->
      <link rel="stylesheet" href="/static/css/style.css">
 </head>
@@ -18,6 +19,7 @@
         <ul class="menuBar">
            <li><a href="/">Home</a></li>
            <li><a href="/manufacturers">Manufacturers</a></li>
+           <li><a href="/models">Car Models</a></li>
            <li><a href="/categories">Categories</a></li>
         </ul>
         <div class="homepage">
@@ -30,10 +32,11 @@
             </div>
 
         </div>
-            {{template  "content".}}
+              {{block "content" . }}{{end}}
     </main>
      <footer>
-        <p>Crafted with GO | 2025 projects</p>
+        <p>Crafted with GO | 2025 projects </p>
      </footer>
 </body>
 </html>
+{{end}}
