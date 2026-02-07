@@ -1,5 +1,7 @@
 package main
 
+import "html/template"
+
 // Building lookup maps
 
 func manufacturerMap(manufacturer []Manufacturer) map[int]string {
@@ -18,3 +20,13 @@ func categoryMap(category []Category) map[int]string {
 	}
 	return catMap
 }
+
+// -------------------
+// Global Variables
+
+var (
+	homeTmpl  = template.Must(template.ParseFiles("templates/layout.html", "templates/views.html"))
+	modelTmpl = template.Must(template.ParseFiles("templates/layout.html", "templates/models.html"))
+	categTmpl = template.Must(template.ParseFiles("templates/layout.html", "templates/category.html"))
+	manufTmpl = template.Must(template.ParseFiles("templates/layout.html", "templates/manufacturer.html"))
+)
