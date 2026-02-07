@@ -2,6 +2,7 @@ package main
 
 import (
 	"encoding/json"
+	"fmt"
 	"net/http"
 )
 
@@ -54,13 +55,17 @@ func LoadData() ([]Category, []CarModel, []Manufacturer) {
 
 // fetch car Models from json data and decode to Go struct
 func fetchModel() ([]CarModel, error) {
+	var models []CarModel
 	resp, err := http.Get(APIURL + "/models")
 	if err != nil {
-		return nil, err
+		fmt.Println("Could not access API/car models")
+		models = []CarModel{
+			{Name: "SEVER ERROR: couldn't load cars right now ->API server down"},
+		}
+		return models, err
 	}
 	defer resp.Body.Close()
 
-	var models []CarModel
 	err = json.NewDecoder(resp.Body).Decode(&models)
 	return models, err
 }
