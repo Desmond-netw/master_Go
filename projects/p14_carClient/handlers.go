@@ -6,7 +6,7 @@ import (
 	"net/http"
 )
 
-// templates
+// Parse all templates once
 var templates = template.Must(
 	template.ParseGlob("templates/*.html"),
 )
@@ -16,7 +16,9 @@ var templates = template.Must(
 // JSON API data ->Go struct
 // Go struct - HTML Templates
 
+// -------------------------
 // home page handler
+// -------------------------
 func homeHandler(wr http.ResponseWriter, req *http.Request) {
 
 	var filteredCategories []Category
@@ -45,12 +47,14 @@ func homeHandler(wr http.ResponseWriter, req *http.Request) {
 	}
 
 	// passing filtered
-	homedata := homePageData{
+	data := homePageData{
+		Title:                 "Home",
+		Page:                  "home",
 		FilteredCategories:    filteredCategories,
 		FilteredManufacturers: filteredManufacturers,
 	}
 	wr.WriteHeader(http.StatusOK)
-	renderTemplate(wr, "layout.html", homedata)
+	homeTmpl.ExecuteTemplate(wr, "layout", data)
 }
 
 // Model handler to send model data to html templ
@@ -73,16 +77,19 @@ func modelsHandler(wr http.ResponseWriter, req *http.Request) {
 		models[i].CategoryName = catMap[models[i].CategoryId]
 	}
 
-	fmt.Println("Models fetchd", len(models))
-	carsData := PageData{
+	fmt.Println("Models fetch", len(models))
+	data := PageData{
 		Title:  "Car Models",
+		Page:   "models",
 		Models: models,
 	}
 
-	renderTemplate(wr, "layout.html", carsData)
+	modelTmpl.ExecuteTemplate(wr, "models.html", data)
 }
 
-// Manufacturer handler to send manufacture data to html
+// --------------------------------------------------
+// Manufacturer  Page data
+// ---------------------------------------------
 func manufacturerHandler(wr http.ResponseWriter, req *http.Request) {
 	// geting manuf data
 	manufacturer, err := fetchManufacturers()
@@ -92,16 +99,20 @@ func manufacturerHandler(wr http.ResponseWriter, req *http.Request) {
 	}
 
 	fmt.Println("Manufacturers fetch", len(manufacturer)) // sending signal to cli
-	manufacturerData := PageData{
+	data := PageData{
 		Title:         "Car Manufacturers",
+		Page:          "manufacturers",
 		Manufacturers: manufacturer,
 	}
 
 	// render template to html output
-	renderTemplate(wr, "layout.html", manufacturerData)
+	manufTmpl.ExecuteTemplate(wr, "manufacturer.html", data)
 
 }
 
+// ------------------
+// Categories Page
+// -------------------
 func categoryHandler(wr http.ResponseWriter, req *http.Request) {
 	category, err := fetchCategory()
 	if err != nil {
@@ -110,20 +121,15 @@ func categoryHandler(wr http.ResponseWriter, req *http.Request) {
 	}
 
 	fmt.Println("category fetch", len(category))
-	categoryData := PageData{
+	data := PageData{
 		Title:      "Car Category",
+		Page:       "categories",
 		Categories: category,
 	}
 
-	renderTemplate(wr, "layout.html", categoryData)
+	categTmpl.ExecuteTemplate(wr, "category.html", data)
 
 }
 
 // func to handle template rendering
-func renderTemplate(wr http.ResponseWriter, tmpl string, data interface{}) {
-	//passing specific html templates
-	err := templates.ExecuteTemplate(wr, tmpl, data)
-	if err != nil {
-		http.Error(wr, err.Error(), http.StatusInternalServerError)
-	}
-}
+// s
