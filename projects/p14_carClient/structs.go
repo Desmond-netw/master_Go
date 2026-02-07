@@ -39,15 +39,14 @@ type CarModel struct {
 
 // Page data struct
 type PageData struct {
-	Title         string
+	Page          string
 	Models        []CarModel
 	Manufacturers []Manufacturer
 	Categories    []Category
 }
 
 type homePageData struct {
-	Title string
-
+	Page string
 	//searc
 	SearchQuery        string
 	SearchHasNoResults bool
