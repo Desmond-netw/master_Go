@@ -2,28 +2,44 @@
  <!--      Car Models Views -->
  <!-- --------------------- -->
 {{ define "content" }}
-<h2>{{ .Title }}</h2>
 <div class="carContainer">
-{{range .Models}}
-    <div class="carWrapper" >
-        <h3>{{.Name}} ({{.Year}})</h3>
-        <p>
-            <strong>Maufacturer :</strong> {{.ManufacturerName}} <br>
-            <strong>Category :</strong> {{.CategoryName}} 
-        </p>
+    <div class="gridWrapper">
+    {{range .Models}}
+      <div class="carCard">
+        <!-- card top img -->
+            <div class="topImg">
+                {{if .Image}}
+                <img src="http://localhost:3000/api/images/{{.Image }}" width="200" height="200" >
+                {{end}}
+            </div>
+            <div class="downDetail">
+                <div class="Itemheader"><h3>{{.Name}} ({{.Year}})</h3></div>
+                <div class="Itemdetail">
+                    
+                    <p>
+                    <strong>Maufacturer :</strong> {{.ManufacturerName}} <br>
+                    <strong>Category :</strong> {{.CategoryName}} 
+                    </p>
+                    <!-- specifications -->
+                    <h4 class="spec-title">
+                        Specifications
+                        <button class="spec-toggle" type="button">▼</button>
+                    </h4>
 
-        <h4>Specifications</h4>
-        <ul>
-            <li>Engine: {{.Specifications.Engine}}</li>
-            <li>Horsepower: {{.Specifications.Horsepower}} HP</li>
-            <li>Transmission: {{.Specifications.Transmission}}</li>
-            <li>Drivetrain: {{.Specifications.Drivetrain}}</li>
-        </ul>
-        {{if .Image}}
-            <img src="http://localhost:3000/api/images/{{.Image }}" width="200" height="200" >
-        {{end}}
-    </div>
+                    <div class="dropDown">
+                        <ul>
+                            <li>Engine: {{.Specifications.Engine}}</li>
+                            <li>Horsepower: {{.Specifications.Horsepower}} HP</li>
+                            <li>Transmission: {{.Specifications.Transmission}}</li>
+                            <li>Drivetrain: {{.Specifications.Drivetrain}}</li>
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+        </div>
     {{end}}
+    </div>
 </div>
 {{end}} 
 
