@@ -92,9 +92,11 @@ main {
     flex-direction: column;
     gap: 2rem;
     align-items: center;
+    justify-content: center;
     width: 100%;
     padding: 20px;
     background-color: #ffffff;
+
 }
 
 /* -------- Menu Bar -------- */
@@ -130,24 +132,6 @@ main {
 }
 
 /* -- Contents csss */
-.carContainer {
-     display: grid;
-     grid-template-columns:auto auto;
-     gap: 20px;
-     width: 100%;
-     max-width: 1200px;
-     margin: 0 auto;
-     padding: 20px;
-     background-color: dodgerblue;
-}
-.container .carWrapper {
-     background-color: #f1f1f1;
-     border: 1px solid #ddd;
-     padding: 20px;
-     border-radius: 8px;
-     box-shadow: 0 2px 6px rgba(0, 0,0, 0.1);
-     
-}
 
 
 /* =============================== */
@@ -233,4 +217,124 @@ main {
     .manufacturerWrapper {
         width: 50%;
     }
+}
+
+
+/* -------------------------------
+   MODELS PAGE GRID
+--------------------------------*/
+
+.carContainer {
+    width: 100%;
+    background: #f3f4f6;
+    padding: 2.5rem;
+}
+
+/* Grid wrapper */
+.gridWrapper {
+    width: 100%;
+    max-width: 1200px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+    margin: 0 auto;
+}
+
+/* -------------------------------
+   CAR CARD
+--------------------------------*/
+
+.carCard {
+    background: #ffffff;
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.carCard:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 16px 36px rgba(0, 0, 0, 0.18);
+}
+
+/* Top image */
+.topImg {
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+}
+
+.topImg img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* -------------------------------
+   CARD CONTENT
+--------------------------------*/
+
+.downDetail {
+    padding: 1.2rem 1.4rem;
+}
+
+.Itemheader h3 {
+    margin: 0 0 0.6rem;
+    font-size: 1.1rem;
+    color: #111827;
+}
+
+.Itemdetail p {
+    font-size: 0.95rem;
+    color: #374151;
+    margin-bottom: 0.8rem;
+}
+
+/* -------------------------------
+   SPECIFICATIONS DROPDOWN
+--------------------------------*/
+
+.spec-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1rem;
+    margin-top: 1rem;
+    color: #111827;
+}
+
+/* Toggle button */
+.spec-toggle {
+    background: #e5e7eb;
+    border: none;
+    border-radius: 50%;
+    width: 28px;
+    height: 28px;
+    cursor: pointer;
+    font-size: 0.8rem;
+    transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.spec-toggle:hover {
+    background: #d1d5db;
+    transform: scale(1.05);
+}
+
+/* Dropdown content */
+.dropDown {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.35s ease;
+}
+
+.dropDown ul {
+    margin: 0.8rem 0 0;
+    padding-left: 1.2rem;
+    font-size: 0.9rem;
+    color: #374151;
+}
+
+/* Active state */
+.dropDown.open {
+    max-height: 300px;
 }
