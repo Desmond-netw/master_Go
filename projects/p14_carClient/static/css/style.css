@@ -33,7 +33,7 @@
     --space-md: 16px;
     --space-lg: 24px;
     --space-xl: 32px;
-    --grid-padding: 40px;
+    --grid-padding: 15px;
 
     /* Radii */
     --radius-sm: 6px;
@@ -66,6 +66,10 @@ body {
     background-color: #f4f6f8;
     color: #000;
     font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     
 }
 h2 {
@@ -142,63 +146,100 @@ main {
 --------------------------------*/
 
 .homedata {
-    display: flex;
-    flex-direction: column;
-    gap: 3rem;
-    padding: 2rem;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 1.5rem;
+    padding: var(--grid-padding);
+}
+/* on small screens */
+@media (max-width:768px) {
+    .homedata {
+        grid-template-columns: 1fr;
+    }
 }
 
-/* Shared wrapper styles */
-.categoryWrapper,
-.manufacturerWrapper {
+/* home category sections  */
+/* ------------------------------ */
+
+.categoryWrapper {
     background: #f9fafb;
     padding: 2rem;
-    border-radius: 12px;
+    border-radius: 14px;
 }
-
-/* Section headings */
-.categoryWrapper h2,
-.manufacturerWrapper h2 {
-    font-size: 1.4rem;
+.categoryWrapper h2 {
     margin-bottom: 1.5rem;
-    color: #1f2937;
+    font-size: 1.3rem;
 }
-
-/* Cards container */
-.cat-card,
-.manu-card {
+/*  Flex grid for cat card */
+.categoryWrapper .cat-card {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(150px,1fr));
     gap: 1rem;
 }
 
-/* Button-like links (shared) */
-.cat-Item,
-.manu-items {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-
+/* Category buttons */
+.categoryWrapper .cat-Item {
     padding: 0.8rem 1rem;
-    border-radius: 10px;
-
     background: #ffffff;
-    color: #111827;
-    font-weight: 500;
-    text-decoration: none;
+    border-radius: 10px;
     text-align: center;
+    text-decoration: none;
+    font-weight: 500;
+    color: #111827;
 
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-    transition: all 0.25s ease;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.categoryWrapper .cat-Item:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 22px rgba(0, 0, 0, 0.15);
 }
 
-/* Hover effect */
-.cat-Item:hover,
+/* -------------------------------
+   MANUFACTURER SECTION
+--------------------------------*/
+.manufacturerWrapper {
+    background: #f9fafb;
+    padding: 2rem;
+    border-radius: 14px;
+}
+.manufacturerWrapper h2 {
+    margin-bottom: 1.5rem;
+    font-size: 1.3rem;
+}
+/* fix grid 2 cols * auto rows */
+.manu-card {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: minmax(44px, auto);
+    gap: 1rem;
+
+    max-height: calc(4 * 54px + 3 * 1rem); /* 4 rows visible */
+    overflow-y: auto;
+    padding-right: 0.3rem;
+}
+/* Manufacturer buttons */
+.manu-items {
+    padding: 0.7rem 0.8rem;
+    background: #ffffff;
+    border-radius: 10px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: #111827;
+
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
 .manu-items:hover {
     transform: translateY(-3px);
     box-shadow: 0 10px 22px rgba(0, 0, 0, 0.15);
-    background: #111827;
-    color: #ffffff;
 }
 
 /* Active / focus */
@@ -337,4 +378,15 @@ main {
 /* Active state */
 .dropDown.open {
     max-height: 300px;
+}
+
+/* ----------- Footer --------- */
+footer {
+    font-size: 1.5rem;
+    font-weight: 400;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 20px 20px;
 }

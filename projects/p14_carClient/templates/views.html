@@ -3,7 +3,7 @@
 
 <div class="homedata">
     <div class="categoryWrapper">
-        <h2>Explore More cars by Their Category</h2>
+        <h2>Explore  by Car Category</h2>
         <div class="cat-card"> 
             {{range .FilteredCategories}}
                 <a class="cat-Item" href="/categories/{{.ID}}">{{.Name}}</a>
@@ -11,7 +11,7 @@
         </div>
     </div>
     <div class="manufacturerWrapper">
-        <h2> Explore our cars by Their Manufactures</h2>
+        <h2> Explore our Manufacturers</h2>
         <div class="manu-card">
             {{range .FilteredManufacturers}}
                 <a class="manu-items" href="/manufacturers/{{.ID}}">{{.Name}}</a>
