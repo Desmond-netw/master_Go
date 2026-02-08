@@ -25,48 +25,86 @@ const APIURL = "http://localhost:3000/api"
 each loading data from it's API endpoint
 */
 func LoadData() ([]Category, []CarModel, []Manufacturer) {
-	catChanel := make(chan []Category)
-	carModelChanel := make(chan []CarModel)
-	manuChanel := make(chan []Manufacturer)
+
+	// result struct
+	type result[T any] struct {
+		data []T
+		err  error
+		src  string
+	}
+
+	catChanel := make(chan result[Category])
+	carModelChanel := make(chan result[CarModel])
+	manuChanel := make(chan result[Manufacturer])
 
 	// load each data set
 	go func() {
-		categories, _ := fetchCategory()
-		catChanel <- categories
+		data, err := fetchCategory()
+		catChanel <- result[Category]{data, err, "Categories"}
 	}()
 
 	go func() {
-		carModels, _ := fetchModel()
-		carModelChanel <- carModels
+		data, err := fetchModel()
+		carModelChanel <- result[CarModel]{data, err, "Models"}
 	}()
 
 	go func() {
-		manufacturers, _ := fetchManufacturers()
-		manuChanel <- manufacturers
+		data, err := fetchManufacturers()
+		manuChanel <- result[Manufacturer]{data, err, "Manufacturers"}
 	}()
+	// storing var to data struct
+	var (
+		categories    []Category
+		models        []CarModel
+		manufacturers []Manufacturer
+		errors        []APIError
+	)
 
-	// waiting to catch responses
-	cat := <-catChanel
-	modes := <-carModelChanel
-	manus := <-manuChanel
+	for i := 0; i < 3; i++ {
+		select {
+		case r := <-catChanel:
+			if r.err != nil {
+				errors = append(errors, APIError{r.src, r.err.Error()})
+			} else {
+				categories = r.data
+			}
+		case r := <-carModelChanel:
+			if r.err != nil {
+				errors = append(errors, APIError{r.src, r.err.Error()})
+			} else {
+				models = r.data
+			}
 
-	return cat, modes, manus
+		case r := <-manuChanel:
+			if r.err != nil {
+				errors = append(errors, APIError{r.src, r.err.Error()})
+			} else {
+				manufacturers = r.data
+			}
+
+		}
+	}
+
+	return categories, models, manufacturers
 }
 
 // fetch car Models from json data and decode to Go struct
 func fetchModel() ([]CarModel, error) {
-	var models []CarModel
+
 	resp, err := http.Get(APIURL + "/models")
 	if err != nil {
-		fmt.Println("Could not access API/car models")
-		models = []CarModel{
-			{Name: "SEVER ERROR: couldn't load cars right now ->API server down"},
-		}
-		return models, err
+		return nil, fmt.Errorf("models API unreachable")
 	}
 	defer resp.Body.Close()
 
-	err = json.NewDecoder(resp.Body).Decode(&models)
+	if resp.StatusCode != http.StatusOK {
+		return nil, fmt.Errorf("Models API returned %d", resp.StatusCode)
+	}
+	var models []CarModel
+	if err = json.NewDecoder(resp.Body).Decode(&models); err != nil {
+		return nil, fmt.Errorf("Invalide models response")
+	}
+
 	return models, err
 }
 
@@ -75,12 +113,18 @@ func fetchModel() ([]CarModel, error) {
 func fetchManufacturers() ([]Manufacturer, error) {
 	resp, err := http.Get(APIURL + "/manufacturers")
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("Manufacturer API unreachable")
 	}
 	defer resp.Body.Close() // close response body
 
-	var manufacturers []Manufacturer                        // var to store address manuf
-	err = json.NewDecoder(resp.Body).Decode(&manufacturers) // decoding json data from resp.body to Go struct
+	if resp.StatusCode != http.StatusOK {
+		return nil, fmt.Errorf("manufacturers API returned %d", resp.StatusCode)
+	}
+
+	var manufacturers []Manufacturer // var to store address manuf
+	if err = json.NewDecoder(resp.Body).Decode(&manufacturers); err != nil {
+		return nil, fmt.Errorf("invalide manufacturers response")
+	} // decoding json data from resp.body to Go struct
 	return manufacturers, err
 }
 
@@ -88,12 +132,17 @@ func fetchManufacturers() ([]Manufacturer, error) {
 func fetchCategory() ([]Category, error) {
 	resp, err := http.Get(APIURL + "/categories")
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("category API unreachable")
 	}
 	defer resp.Body.Close() // close response body
 
+	if resp.StatusCode != http.StatusOK {
+		return nil, fmt.Errorf("category API returned %d", resp.StatusCode)
+	}
 	var categories []Category
-	err = json.NewDecoder(resp.Body).Decode(&categories)
+	if err = json.NewDecoder(resp.Body).Decode(&categories); err != nil {
+		return nil, fmt.Errorf("invalide category response")
+	}
 	return categories, err
 }
 
