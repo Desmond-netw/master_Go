@@ -44,6 +44,7 @@ type PageData struct {
 	Models        []CarModel
 	Manufacturers []Manufacturer
 	Categories    []Category
+	Errors        []APIError
 }
 
 type homePageData struct {
@@ -55,4 +56,10 @@ type homePageData struct {
 
 	FilteredCategories    []Category
 	FilteredManufacturers []Manufacturer
+}
+
+// API ERROR Structs
+type APIError struct {
+	Source  string
+	Message string
 }
