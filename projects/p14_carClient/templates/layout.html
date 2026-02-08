@@ -37,6 +37,19 @@
      <footer>
         <p>Crafted with GO | 2025 projects </p>
      </footer>
+
+     <script>
+document.addEventListener("click", function (e) {
+    if (e.target.classList.contains("spec-toggle")) {
+        const dropdown = e.target.closest(".Itemdetail").querySelector(".dropDown");
+        dropdown.classList.toggle("open");
+
+        // rotate arrow
+        e.target.textContent = dropdown.classList.contains("open") ? "▲" : "▼";
+    }
+});
+</script>
+
 </body>
 </html>
 {{end}}
